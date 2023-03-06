@@ -1,0 +1,26 @@
+{
+  "name": "finalnode",
+  "version": "1.0.0",
+  "description": "dernier projet dans la 3wa",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon main.js"
+  },
+  "author": "Mohamed Essahli",
+  "license": "ISC",
+  "devDependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "helmet": "^6.0.1",
+    "jsonwebtoken": "^9.0.0",
+    "nodemon": "^2.0.21",
+    "sequelize": "^6.29.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "mariadb": "^3.1.0"
+  }
+}
