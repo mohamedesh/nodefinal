@@ -1,37 +1,30 @@
-const {DataTypes} = require("sequelize")
-const db = require("../db/db")
-const Favoris = require("./Favoris")
+import {DataTypes} from "sequelize"
+import connection from "../config/db.js";
 
-const Ressource = db.define("Ressource",{
-    id:{
-        type:DataTypes.INTEGER,
-        primaryKey:true,
-        autoIncrement:true
+
+const Ressource = connection.db.define("Ressource", {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
     },
-    title:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    url:{
-        type:DataTypes.STRING,
+    title: {
+        type: DataTypes.STRING(30),
         allowNull: false
     },
-    description:{
-        type:DataTypes.STRING,
-        allowNull:false
+    url: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
-    private:{
-        type:DataTypes.BOOLEAN,
-        allowNull:false
+    description: {
+        type: DataTypes.STRING(255),
+        allowNull: false
+    },
+    private: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
     }
 })
 
-Ressource.hasMany(Favoris,{
-    foreignKey:{
-        allowNull:false,
-        name:"lienId"
-    },
-    sourceKey:"id"
-})
 
-module.exports = Ressource
+export default Ressource

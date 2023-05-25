@@ -1,0 +1,1 @@
+export const secret = process.env.JWT_SECRET || "s1NAix8"

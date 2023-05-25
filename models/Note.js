@@ -1,24 +1,25 @@
-const {DataTypes} = require("sequelize")
-const db = require("../db/db")
+import {DataTypes, Model} from "sequelize"
+import connection from "../config/db.js";
 
-const Note = db.define("Note",{
-    id:{
-        type:DataTypes.INTEGER,
-        primaryKey:true,
-        autoIncrement:true
+const Note = connection.db.define("Note", {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
     },
-    title:{
-        type:DataTypes.STRING,
-        allowNull:false
+    title: {
+        type: DataTypes.STRING(30),
+        allowNull: false
     },
-    description:{
-        type:DataTypes.STRING,
-        allowNull:false
+    description: {
+        type: DataTypes.STRING(255),
+        allowNull: false
     },
-    contain:{
-        type:DataTypes.STRING,
-        allowNull:false
+    contain: {
+        type: DataTypes.STRING(255),
+        allowNull: false
     }
 })
 
-module.exports = Note
+console.log(Note === connection.db.models.Note)
+export default Note
