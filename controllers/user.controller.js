@@ -51,7 +51,6 @@ const signIn = async (req, res) => {
     // bcrypt compare password ecrit du cote front et le password qui est enregistrer du cote bdd
     const passWordIsOk = await bcrypt.compare(password, user?.dataValues?.password)
 
-
     if (passWordIsOk) {
         console.log(user.id)
         const token = jwtSign(user.id);

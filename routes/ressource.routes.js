@@ -6,6 +6,7 @@ const initRessourceRoutes = (app) => {
     const router = Router();
     router.get("/displayAll/:userId", RessourceController.displayRessourceByUserId);
     router.get("/displayOne/:id", RessourceController.displayOne);
+    router.get("/displayDiscovery", RessourceController.displayRessourceWithCategorieDiscovery)
     router.post("/create", jwtMiddleware, RessourceController.create);
     router.put("/update/:id", jwtMiddleware, RessourceController.update);
     router.delete("/delete/:id", jwtMiddleware, RessourceController.deleteRessource);

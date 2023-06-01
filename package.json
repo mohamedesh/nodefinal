@@ -10,7 +10,6 @@
   "author": "Mohamed Essahli",
   "license": "ISC",
   "devDependencies": {
-    "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "helmet": "^6.0.1",
@@ -19,6 +18,7 @@
     "sequelize": "^6.29.0"
   },
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
     "mariadb": "^3.1.0",

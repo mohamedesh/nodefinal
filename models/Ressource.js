@@ -23,7 +23,6 @@ const Ressource = connection.db.define("Ressource", {
     shareRessource: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: false,
     }
 })
 //

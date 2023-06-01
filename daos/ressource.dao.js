@@ -9,7 +9,9 @@ const createRessource = async (title, url, categorieId, description, userId) => 
             url,
             categorieId,
             description,
-            userId: userId
+            userId: userId,
+            shareRessource: false
+
         })
         return ressource
     } catch (e) {
@@ -67,6 +69,17 @@ const displayRessourceByUserId = async (userId) => {
 //     }
 // }
 
+const displayRessourceWithCategorieDiscovery = async () => {
+    try {
+        const display = await Ressource.findAll({
+            where: {shareRessource: true}
+        })
+        return display
+    } catch (e) {
+        console.error(e.message)
+    }
+}
+
 const displayByPk = async (id) => {
     try {
         const display = await Ressource.findByPk(id)
@@ -82,5 +95,6 @@ export const ressourceDao = {
     updateRessource,
     deleteRessource,
     displayRessourceByUserId,
-    displayByPk
+    displayByPk,
+    displayRessourceWithCategorieDiscovery
 }

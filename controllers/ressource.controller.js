@@ -42,10 +42,18 @@ const displayOne = async (req, res) => {
 
 }
 
+const displayRessourceWithCategorieDiscovery = async (req, res) => {
+
+    const ressource = await ressourceDao.displayRessourceWithCategorieDiscovery()
+    if (!ressource) return res.status(400).json({message: `pas de ressource publique afficher`})
+    res.status(200).json({message: `les ressources publique ont bien été afficher`, ressource})
+}
+
 export const RessourceController = {
     create,
     update,
     deleteRessource,
     displayRessourceByUserId,
-    displayOne
+    displayOne,
+    displayRessourceWithCategorieDiscovery
 }
