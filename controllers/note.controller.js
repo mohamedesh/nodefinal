@@ -9,19 +9,14 @@ const create = async (req, res) => {
     res.status(201).json({message: `note_created`, note})
 }
 
-const display = async (req, res) => {
-    const note = await NoteDao.displayNote();
+const displayNotes = async (req, res) => {
+
+    const {userId} = req.params
+    const note = await NoteDao.displayAllNotes(userId);
     if (!note) return res.status(400).json({message: `les notes ne s'affiche pas`})
     res.status(200).json({message: `note_display`, note})
 }
 
-const displayOne = async (req, res) => {
-    const id = req.params.id
-    const note = await NoteDao.displayOne(id)
-    if (!note) return res.status(400).json({message: `la note ne s'affiche pas`})
-    res.status(200).json({message: `note_displayOne`, note})
-
-}
 
 const update = async (req, res) => {
     const {title, description, contain} = req.body
@@ -40,8 +35,7 @@ const deleteNote = async (req, res) => {
 
 export const NoteController = {
     create,
-    display,
-    displayOne,
+    displayNotes,
     update,
     deleteNote
 }

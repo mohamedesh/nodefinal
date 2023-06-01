@@ -6,8 +6,7 @@ import {jwtMiddleware} from "../middleware/jwt.middleware.js";
 const initNoteRoutes = (app) => {
     const router = Router();
 
-    router.get("/displayNote", NoteController.display);
-    router.get("/displayOne/:id", NoteController.displayOne);
+    router.get("/displayNotes/:userId", NoteController.displayNotes);
     router.post("/createNote", jwtMiddleware, NoteController.create);
     router.put("/updateNote/:id", NoteController.update);
     router.delete("/deleteNote/:id", NoteController.deleteNote);

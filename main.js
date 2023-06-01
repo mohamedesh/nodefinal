@@ -2,11 +2,10 @@ import express from "express"
 
 const app = express();
 import connection from "./config/db.js";
-// import Note from "./models/Note.js";
-// import Role from "./models/Role.js";
-// import User from "./models/User.js";
-
-// import Ressource from "./models/Ressource.js";
+import Note from "./models/Note.js";
+import Role from "./models/Categorie.js";
+import User from "./models/User.js";
+import Ressource from "./models/Ressource.js";
 
 
 // importation des routes et des middleswares

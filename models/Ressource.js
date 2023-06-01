@@ -1,6 +1,6 @@
 import {DataTypes} from "sequelize"
 import connection from "../config/db.js";
-
+import Categorie from "./Categorie.js";
 
 const Ressource = connection.db.define("Ressource", {
     id: {
@@ -20,11 +20,24 @@ const Ressource = connection.db.define("Ressource", {
         type: DataTypes.STRING(255),
         allowNull: false
     },
-    private: {
+    shareRessource: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: false,
     }
 })
-
-
+//
+// Ressource.belongsTo(Categorie, {
+//     foreignKey: {
+//         allowNull: false,
+//         name: "CategorieId"
+//     }
+// })
+//
+// Ressource.hasOne(Categorie, {
+//     foreignKey: {
+//         allowNull: false,
+//         name: "CategorieId"
+//     }
+// })
 export default Ressource

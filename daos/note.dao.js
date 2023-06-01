@@ -47,19 +47,11 @@ const deleteNote = async (id) => {
     }
 }
 
-const displayNote = async () => {
+const displayAllNotes = async (userId) => {
     try {
-        const note = await Note.findAll()
-        return note
-    } catch (e) {
-        console.error(e.message)
-        return null
-    }
-}
-
-const displayOne = async (id) => {
-    try {
-        const note = await Note.findByPk(id)
+        const note = await Note.findAll({
+            where: {userId: userId}
+        })
         return note
     } catch (e) {
         console.error(e.message)
@@ -68,8 +60,7 @@ const displayOne = async (id) => {
 }
 
 export const NoteDao = {
-    displayNote,
-    displayOne,
+    displayAllNotes,
     createNote,
     updateNote,
     deleteNote,

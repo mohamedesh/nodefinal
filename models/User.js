@@ -2,7 +2,7 @@ import {DataTypes} from "sequelize"
 import connection from "../config/db.js";
 import Note from "./Note.js"
 import Ressource from "./Ressource.js"
-import Role from "./Role.js";
+// import Role from "./Categorie.js";
 
 
 const User = connection.db.define("User", {
@@ -60,13 +60,15 @@ User.hasMany(Ressource, {
     sourceKey: "id"
 })
 
-User.belongsTo(Role, {
-    foreignKey: {
-        allowNull: false,
-        name: 'roleId'
-    },
-    targetKey: "id"
-})
+// pr le cote admin 
+
+// User.belongsTo(Role, {
+//     foreignKey: {
+//         allowNull: false,
+//         name: 'roleId'
+//     },
+//     targetKey: "id"
+// })
 
 
 export default User

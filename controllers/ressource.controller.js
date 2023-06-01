@@ -1,8 +1,9 @@
 import {ressourceDao} from "../daos/ressource.dao.js";
 
 const create = async (req, res) => {
-    const {title, url, description, userId} = req.body
-    const ressource = await ressourceDao.createRessource(title, url, description, userId)
+
+    const {title, url, categorieId, description, userId} = req.body
+    const ressource = await ressourceDao.createRessource(title, url, categorieId, description, userId)
     if (!ressource) {
         return res.status(403).json({message: `pas de creation`})
     }
@@ -10,11 +11,11 @@ const create = async (req, res) => {
 }
 
 const update = async (req, res) => {
-    const {title, url, description} = req.body
+    const {title, url, categorieId, description, shareRessource} = req.body
 
     const id = req.params.id
     console.log(id)
-    const ressource = await ressourceDao.updateRessource(title, url, description, id)
+    const ressource = await ressourceDao.updateRessource(title, url, categorieId, description, id, shareRessource)
     if (!ressource) return res.status(400).json({message: `pas de ressource trouvé pour la modifier`})
     return res.status(200).json({message: `le lien a bien été modifié`, ressource})
 }
@@ -26,9 +27,9 @@ const deleteRessource = async (req, res) => {
     res.status(200).json({message: `le lien a bien été supprimer`, ressource})
 }
 
-const displayAll = async (req, res) => {
-
-    const ressource = await ressourceDao.displayRessource()
+const displayRessourceByUserId = async (req, res) => {
+    const {userId} = req.params
+    const ressource = await ressourceDao.displayRessourceByUserId(userId)
     if (!ressource) return res.status(400).json({message: `pas de ressource à l'affichage`})
     res.status(200).json({message: `les liens ont bien été afficher`, ressource})
 }
@@ -45,6 +46,6 @@ export const RessourceController = {
     create,
     update,
     deleteRessource,
-    displayAll,
+    displayRessourceByUserId,
     displayOne
 }
