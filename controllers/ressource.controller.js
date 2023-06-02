@@ -12,7 +12,6 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
     const {title, url, categorieId, description, shareRessource} = req.body
-
     const id = req.params.id
     console.log(id)
     const ressource = await ressourceDao.updateRessource(title, url, categorieId, description, id, shareRessource)
@@ -49,11 +48,19 @@ const displayRessourceWithCategorieDiscovery = async (req, res) => {
     res.status(200).json({message: `les ressources publique ont bien été afficher`, ressource})
 }
 
+const displayRessourceByCategorieId = async (req, res) => {
+    const {id} = req.params
+    const ressource = await ressourceDao.displayRessourceByCategorieId(id)
+    if (!ressource) return res.status(400).json({message: `pas de ressource publique afficher`})
+    res.status(200).json({message: `les ressources publique ont bien été afficher`, ressource})
+}
+
 export const RessourceController = {
     create,
     update,
     deleteRessource,
     displayRessourceByUserId,
     displayOne,
-    displayRessourceWithCategorieDiscovery
+    displayRessourceWithCategorieDiscovery,
+    displayRessourceByCategorieId
 }

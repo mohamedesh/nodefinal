@@ -26,11 +26,10 @@ const updateRessource = async (title, url, categorieId, description, id, shareRe
         const ressource = await ressourceUpdate.update({
             title,
             url,
+            categorieId,
             description,
             shareRessource
         })
-        console.log(ressourceUpdate, "ressourceUpdate")
-        console.log(ressource, "ressource")
         return ressource
     } catch (e) {
         console.error(e.message)
@@ -61,14 +60,6 @@ const displayRessourceByUserId = async (userId) => {
     }
 }
 
-// const displayRessourceUser = async () => {
-//     try {
-//
-//     } catch (e) {
-//         console.error(e.message)
-//     }
-// }
-
 const displayRessourceWithCategorieDiscovery = async () => {
     try {
         const display = await Ressource.findAll({
@@ -80,7 +71,24 @@ const displayRessourceWithCategorieDiscovery = async () => {
     }
 }
 
+
+const displayRessourceByCategorieId = async (id) => {
+    try {
+        const display = await Ressource.findAll({
+            where: {
+                categorieId: id,
+                shareRessource: true
+            },
+
+        })
+        return display
+    } catch (e) {
+        console.error(e.message)
+    }
+}
+
 const displayByPk = async (id) => {
+    x
     try {
         const display = await Ressource.findByPk(id)
         return display
@@ -96,5 +104,6 @@ export const ressourceDao = {
     deleteRessource,
     displayRessourceByUserId,
     displayByPk,
-    displayRessourceWithCategorieDiscovery
+    displayRessourceWithCategorieDiscovery,
+    displayRessourceByCategorieId
 }
