@@ -1,5 +1,4 @@
 import Ressource from "../models/Ressource.js";
-import categorie from "../models/Categorie.js";
 
 const createRessource = async (title, url, categorieId, description, userId) => {
     console.log(categorieId, userId)
@@ -71,7 +70,6 @@ const displayRessourceWithCategorieDiscovery = async () => {
     }
 }
 
-
 const displayRessourceByCategorieId = async (id) => {
     try {
         const display = await Ressource.findAll({
@@ -79,22 +77,10 @@ const displayRessourceByCategorieId = async (id) => {
                 categorieId: id,
                 shareRessource: true
             },
-
         })
         return display
     } catch (e) {
         console.error(e.message)
-    }
-}
-
-const displayByPk = async (id) => {
-    x
-    try {
-        const display = await Ressource.findByPk(id)
-        return display
-    } catch (e) {
-        console.error(e.message)
-        return null
     }
 }
 
@@ -103,7 +89,6 @@ export const ressourceDao = {
     updateRessource,
     deleteRessource,
     displayRessourceByUserId,
-    displayByPk,
     displayRessourceWithCategorieDiscovery,
     displayRessourceByCategorieId
 }

@@ -44,7 +44,6 @@ const signIn = async (req, res) => {
     if (!stringIsFilled(email) || !stringIsFilled(password)) {
         return res.status(404).json({message: `email or password incorrect`})
     }
-
     const user = await UserDao.readUserEmail(email);
     console.log(user)
     // les ? permettent de renvoyer null et d'arreter le code ici
@@ -59,11 +58,8 @@ const signIn = async (req, res) => {
     } else {
         return res.status(401).json({message: `login_failed`})
     }
-
-
 }
 
-//modifier un user
 const update = async (req, res) => {
     const {pseudo, password, email} = req.body;
     console.log(pseudo, password, email)
@@ -76,7 +72,6 @@ const update = async (req, res) => {
     return res.status(200).json({user, message: "ça marche"})
 }
 
-// supprimer un user
 const deleteUser = async (req, res) => {
     const id = req.params.id
     const user = await UserDao.deleteUser(id)
@@ -85,22 +80,7 @@ const deleteUser = async (req, res) => {
     }
 }
 
-// revoir cette partie
-const getUserInfos = async (req, res) => {
-    const {userId} = req.body;
-    const user = await UserDao.readByPk(userId);
-    // if (userId !== "admin") {
-    //     return res.status(403).json({message: `pas d'autorisation`})
-    // } else {
-    //     return res.status(200).json({user});
-    // }
-    if (!user) return res.status(400).json({message: `can't retrieve user`});
-    return res.status(200).json({user});
-
-};
-
 const getUserAll = async (req, res) => {
-
     const user = await UserDao.readAll()
     if (!user) return res.status(400).json({message: `can't retrieve user`});
     return res.status(200).json({user});
@@ -111,7 +91,6 @@ export const UserController = {
     signUp,
     update,
     deleteUser,
-    getUserInfos,
     getUserAll
 }
 

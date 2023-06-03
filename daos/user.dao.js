@@ -34,7 +34,6 @@ const createUser = async (surname, name, pseudo, password, email) => {
         console.error("erreur ici")
         error = e.message
     }
-
     return {result, error}
 }
 
@@ -80,28 +79,6 @@ const deleteUser = (id) => {
         })
 }
 
-const readByPk = async (userId) => {
-    try {
-        // const user_id = await User.findByPk(id)
-        console.log(userId)
-        // le findBypk attend 2 paramaetre l'id du user et les options qui l'accompagne
-        const user = await User.findByPk(
-            userId,
-            {
-                include: [{
-                    model: Ressource
-                }, {
-                    model: Note
-                }]
-            }
-        );
-        return user
-    } catch (e) {
-        console.error(e.message)
-        return null;
-    }
-}
-
 const readAll = async () => {
     try {
         const user = await User.findAll();
@@ -117,6 +94,5 @@ export const UserDao = {
     readUserEmail,
     updateUser,
     deleteUser,
-    readByPk,
     readAll
 }

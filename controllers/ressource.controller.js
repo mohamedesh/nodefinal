@@ -1,7 +1,6 @@
 import {ressourceDao} from "../daos/ressource.dao.js";
 
 const create = async (req, res) => {
-
     const {title, url, categorieId, description, userId} = req.body
     const ressource = await ressourceDao.createRessource(title, url, categorieId, description, userId)
     if (!ressource) {
@@ -16,33 +15,24 @@ const update = async (req, res) => {
     console.log(id)
     const ressource = await ressourceDao.updateRessource(title, url, categorieId, description, id, shareRessource)
     if (!ressource) return res.status(400).json({message: `pas de ressource trouvé pour la modifier`})
-    return res.status(200).json({message: `le lien a bien été modifié`, ressource})
+    return res.status(200).json({message: `la ressource a bien été modifié`, ressource})
 }
 
 const deleteRessource = async (req, res) => {
     const id = req.params.id
     const ressource = await ressourceDao.deleteRessource(id)
     if (!ressource) return res.status(400).json({message: `pas de ressource trouvé pour la supprimer`})
-    res.status(200).json({message: `le lien a bien été supprimer`, ressource})
+    res.status(200).json({message: `la ressource a bien été supprimer`, ressource})
 }
 
 const displayRessourceByUserId = async (req, res) => {
     const {userId} = req.params
     const ressource = await ressourceDao.displayRessourceByUserId(userId)
     if (!ressource) return res.status(400).json({message: `pas de ressource à l'affichage`})
-    res.status(200).json({message: `les liens ont bien été afficher`, ressource})
-}
-
-const displayOne = async (req, res) => {
-    const id = req.params.id
-    const ressource = await ressourceDao.displayByPk(id)
-    if (!ressource) return res.status(400).json({message: `pas de ressource à l'affichage`})
-    res.status(200).json({message: `le lien a bien été affiché`, ressource})
-
+    res.status(200).json({message: `les ressources ont bien été afficher`, ressource})
 }
 
 const displayRessourceWithCategorieDiscovery = async (req, res) => {
-
     const ressource = await ressourceDao.displayRessourceWithCategorieDiscovery()
     if (!ressource) return res.status(400).json({message: `pas de ressource publique afficher`})
     res.status(200).json({message: `les ressources publique ont bien été afficher`, ressource})
@@ -60,7 +50,6 @@ export const RessourceController = {
     update,
     deleteRessource,
     displayRessourceByUserId,
-    displayOne,
     displayRessourceWithCategorieDiscovery,
     displayRessourceByCategorieId
 }
