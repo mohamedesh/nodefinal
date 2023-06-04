@@ -9,7 +9,6 @@ const initUsersRoutes = (app) => {
     router.post("/signUp", UserController.signUp);
     router.put("/update/:id", jwtMiddleware, UserController.update);
     router.delete("/deleteUser/:id", jwtMiddleware, UserController.deleteUser);
-    router.get("/displayOne", jwtMiddleware, UserController.getUserInfos)
     router.get("/displayAll", jwtMiddleware, UserController.getUserAll)
 
     app.use("/users", router);
