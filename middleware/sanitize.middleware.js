@@ -2,7 +2,6 @@ import escape from "validator/lib/escape.js"
 import {isString} from "../utilitaire/string.utilitaire.js";
 
 
-// permet d'eviter les attaques xxs et fais en sorte que les chaines de caractères avant qu'ils soient traités soient néttoyés
 const sanitize = (obj) => {
     // recup toutes les valeurs de obj
     const keys = Object.keys(obj);
@@ -21,7 +20,5 @@ const sanitize = (obj) => {
 export const sanitizeMiddleware = (req, res, next) => {
     req.body = sanitize(req.body)
     req.params = sanitize(req.params)
-    console.log(req.body)
-    console.log(req.params)
     next()
 }

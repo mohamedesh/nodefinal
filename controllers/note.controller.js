@@ -10,7 +10,6 @@ const create = async (req, res) => {
 }
 
 const displayNotes = async (req, res) => {
-
     const {userId} = req.params
     const note = await NoteDao.displayAllNotes(userId);
     if (!note) return res.status(400).json({message: `les notes ne s'affiche pas`})

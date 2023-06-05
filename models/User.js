@@ -2,8 +2,6 @@ import {DataTypes} from "sequelize"
 import connection from "../config/db.js";
 import Note from "./Note.js"
 import Ressource from "./Ressource.js"
-// import Role from "./Categorie.js";
-
 
 const User = connection.db.define("User", {
     id: {
@@ -34,10 +32,6 @@ const User = connection.db.define("User", {
             message: "email déjà attribuer à un autre utilisateur"
         }
     },
-    private: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    }
 }, {
     timestamps: true,
     createdAt: 'created',

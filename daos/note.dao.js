@@ -1,8 +1,4 @@
-// import du modele correspondant
-
 import Note from "../models/Note.js";
-
-// creation du crud
 
 const createNote = async (title, description, contain, userId) => {
     try {

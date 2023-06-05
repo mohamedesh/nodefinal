@@ -7,5 +7,5 @@ const displayAll = async (req, res) => {
 }
 
 export const CategorieController = {
-    displayAll,
+    displayAll
 }

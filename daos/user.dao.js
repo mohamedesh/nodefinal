@@ -1,17 +1,12 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt"
 import Ressource from "../models/Ressource.js";
-import Note from "../models/Note.js";
 
 const createUser = async (surname, name, pseudo, password, email) => {
     let result = null;
     let error = `user not find `;
-    console.log(surname, name, pseudo, email)
-    console.log(password)
-
     try {
 
-        const emailAdmins = [`mohamed2@gmail.com`]
         const pass = await bcrypt.hash(password, 10)
         console.log(pass)
         const user = await User.create({
@@ -20,14 +15,8 @@ const createUser = async (surname, name, pseudo, password, email) => {
             pseudo,
             password: pass,
             email,
-            private: 1,
-            // condition ternaire sur le role avec la methode qui permet de savoir si à l'interieur de emailAdmin il y a un email, si c'est true il a l'id 2 si c'est false id 1
-            roleId: emailAdmins.includes(email) ? 2 : 1
         })
-
-        // si user existe renvoie user sinon null
         result = user ? user : null;
-        // si user existe renvoie null sinon error
         error = user ? null : error
 
     } catch (e) {
@@ -47,7 +36,6 @@ const readUserEmail = async (email, userId) => {
                 }],
                 where: {email: email}
             })
-        console.log(user)
         return user;
     } catch (e) {
         console.log(e.message)

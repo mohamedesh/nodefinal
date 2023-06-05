@@ -1,6 +1,5 @@
 import {DataTypes} from "sequelize"
 import connection from "../config/db.js";
-import Categorie from "./Categorie.js";
 
 const Ressource = connection.db.define("Ressource", {
     id: {
@@ -25,18 +24,5 @@ const Ressource = connection.db.define("Ressource", {
         allowNull: false,
     }
 })
-//
-// Ressource.belongsTo(Categorie, {
-//     foreignKey: {
-//         allowNull: false,
-//         name: "CategorieId"
-//     }
-// })
-//
-// Ressource.hasOne(Categorie, {
-//     foreignKey: {
-//         allowNull: false,
-//         name: "CategorieId"
-//     }
-// })
+
 export default Ressource

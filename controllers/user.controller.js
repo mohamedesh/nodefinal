@@ -4,16 +4,14 @@ import {stringIsFilled} from "../utilitaire/string.utilitaire.js";
 import {validateEmail, validatePassword} from "../utilitaire/regex.utilitaire.js"
 import bcrypt from "bcrypt";
 
-// controller permet avant d'envoyer ça au daos qu'il n'y est pas d'erreur
-// s'enregistrer
 const signUp = async (req, res) => {
     const {surname, name, pseudo, password, email} = req.body
 
-    const response = await UserDao.createUser(surname, name, pseudo, password, email)
-    if (response.error) {
+    const user = await UserDao.createUser(surname, name, pseudo, password, email)
+    if (user.error) {
         return res.status(403).json({message: response.error})
     }
-    // verification regex
+
     const validate_email = validateEmail(email)
     const validate_password = validatePassword(password)
 
@@ -24,36 +22,22 @@ const signUp = async (req, res) => {
         return res.status(400).json({message: `le password ne contient pas les element requis`})
     }
 
-    // verification du nombre de caractères
-    //
-    // if (name.length || surname.length || pseudo.length === 20) {
-    //     return res.status(400).json({message: `votre nombre de caractères est trop élevé`})
-    // }
-
-    // verification du token
-    const token = jwtSign(response.id)
-    console.log(`token_signUp:${token}`)
-
-    res.status(201).json({message: `user_created`, response: response.result})
+    const token = jwtSign(user.result.id)
+    res.status(201).json({message: `user_created`, response: user.result, token})
 }
 
-// se connecter
+
 const signIn = async (req, res) => {
     const {email, password} = req.body;
-    // verification si le mail et le password sont des chaines de caractères
+
     if (!stringIsFilled(email) || !stringIsFilled(password)) {
         return res.status(404).json({message: `email or password incorrect`})
     }
     const user = await UserDao.readUserEmail(email);
-    console.log(user)
-    // les ? permettent de renvoyer null et d'arreter le code ici
-    // bcrypt compare password ecrit du cote front et le password qui est enregistrer du cote bdd
     const passWordIsOk = await bcrypt.compare(password, user?.dataValues?.password)
 
     if (passWordIsOk) {
-        console.log(user.id)
         const token = jwtSign(user.id);
-        console.log(token)
         return res.status(200).json({message: `ok`, token, user})
     } else {
         return res.status(401).json({message: `login_failed`})

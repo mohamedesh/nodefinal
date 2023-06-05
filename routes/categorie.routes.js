@@ -1,5 +1,4 @@
 import {Router} from "express";
-import {jwtMiddleware} from "../middleware/jwt.middleware.js";
 import {CategorieController} from "../controllers/categorie.controller.js";
 
 const initCategoriesRoutes = (app) => {
